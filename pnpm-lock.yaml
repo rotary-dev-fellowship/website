@@ -61,6 +61,9 @@ devDependencies:
   '@tailwindcss/forms':
     specifier: ^0.5.7
     version: 0.5.7(tailwindcss@3.4.1)
+  astro-vtbot:
+    specifier: ^1.7.2
+    version: 1.7.2
   prettier:
     specifier: ^3.2.5
     version: 3.2.5
@@ -1874,6 +1877,10 @@ packages:
       hast-util-to-html: 8.0.4
       remark-expressive-code: 0.33.5
     dev: false
+
+  /astro-vtbot@1.7.2:
+    resolution: {integrity: sha512-HVcFoAF9nIw2knXFMGPSb9bt/EBj6CXErcXS6t/ekeYybhU75C4CIWqrFVoAegx+/Yh7NCrVd+w25iNuVARoyw==}
+    dev: true
 
   /astro@4.5.12(typescript@5.4.3):
     resolution: {integrity: sha512-xIJcFI2hbyV8+h5pWjL7SKD1jIP0K01fYVAH+gdAt0mJaXy+u8Mj+goD0cPlK6sEaykR+7zxQLYGKJ44U4qarg==}
