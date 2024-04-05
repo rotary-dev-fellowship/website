@@ -16,16 +16,24 @@ export default defineConfig({
     defaultLocale: "en",
     locales: ["en", "fr"],
     fallback: {
-      fr: "en"
+      fr: "en",
     },
     routing: {
-      prefixDefaultLocale: false
-    }
+      prefixDefaultLocale: false,
+    },
   },
   prefetch: true,
   integrations: [
     tailwind(),
-    sitemap(),
+    sitemap({
+      i18n: {
+        defaultLocale: "en", // All urls that don't contain `fr` after `https://screwfast.uk/` will be treated as default locale, i.e. `en`
+        locales: {
+          en: "en", // The `defaultLocale` value must present in `locales` keys
+          fr: "fr",
+        },
+      },
+    }),
     starlight({
       title: 'RotaryDEV Fellowship Docs',
       editLink: {
@@ -71,6 +79,7 @@ export default defineConfig({
       favicon: "/favicon.ico",
       components: {
         SiteTitle: "./src/components/ui/starlight/SiteTitle.astro",
+        Head: "./src/components/ui/starlight/Head.astro",
       },
       head: [
         {

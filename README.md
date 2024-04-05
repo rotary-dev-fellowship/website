@@ -63,6 +63,8 @@ ScrewFast is an open-source template designed for quick and efficient web projec
 - **Preline UI:** Implement prebuilt UI components for added elegance.
 - **GSAP Integration:** Impress with professional and polished animations.
 - **Markdown Content Collections:** Organize and manage your content seamlessly.
+- **Starlight Documentation:** A sleek, user-friendly, full-featured documentation theme.
+- **Internationalization (i18n):** Integrates Astro’s internationalization features.
 - **SEO and Responsiveness:** Ensure your site is discoverable and accessible on any device.
 
 ## What's New
@@ -85,24 +87,28 @@ ScrewFast is an open-source template designed for quick and efficient web projec
   - Serves as a UI demonstration with no live back-end integration.
   
 - [x] **Starlight Documentation Theme Integration**:
-    - A sleek, user-friendly, full-featured documentation theme, which enhances the readability and usability of our documentation.
-    - Offers a range of features such as site navigation, built-in search functionality, dark mode, syntax highlighting for code, and improved SEO.
-    - Seamlessly integrates internationalization (i18n) to provide support for documentation in multiple languages, catering to a global audience.
-    - Designed to facilitate ease of use while offering a modern aesthetic in both light and dark themes to accommodate user preferences.
+  - A sleek, user-friendly, full-featured documentation theme, which enhances the readability and usability of documentation.
+  - Offers a range of features such as site navigation, built-in search functionality, dark mode, syntax highlighting for code, and improved SEO.
+  - Seamlessly integrates internationalization (i18n) to provide support for documentation in multiple languages, catering to a global audience.
+  - Designed to facilitate ease of use while offering a modern aesthetic in both light and dark themes to accommodate user preferences.
 
 - [x] **Icon Set Component**:
-    - Convenient and reusable Icon component that allows adding icons simply by providing a name prop.
-    - Render any pre-defined icon SVG using `<Icon name="iconName" />` in your Astro components.
-    - The Icon Component offers a centralized location for all SVG Icons across the project in one TypeScript file - allowing unified updates and easy maintenance.
-    - **Note:** Users have the option to use other community integrations like [astro-icons](https://github.com/natemoo-re/astro-icon). However, the author decided to create a custom icon set component for managing custom icons.
+  - Convenient and reusable Icon component that allows adding icons simply by providing a name prop.
+  - Render any pre-defined icon SVG using `<Icon name="iconName" />` in your Astro components.
+  - The Icon Component offers a centralized location for all SVG Icons across the project in one TypeScript file - allowing unified updates and easy maintenance.
+  - **Note:** Developers have the option to use other community integrations like [astro-icons](https://github.com/natemoo-re/astro-icon). However, the author decided to create a custom icon set component for managing custom icons.
 
 - [x] **Internationalization (i18n) Features**:
-    - Integrates [Astro’s internationalization (i18n) features](https://docs.astro.build/en/guides/internationalization/).
-    - Additionally, a custom LanguagePicker component has been developed to facilitate language selection.
+  - Integrates [Astro’s internationalization (i18n) features](https://docs.astro.build/en/guides/internationalization/).
+  - Additionally, a custom LanguagePicker component has been developed to facilitate language selection.
+  - Developers can access the monolingual version directly from [`monolingual-site` branch](https://github.com/mearashadowfax/ScrewFast/tree/monolingual-site).
+
+- [x] **Dynamic Table of Contents (ToC) with Scroll Progress Indicator**:
+  - Enhances ease of navigation in insight posts by highlighting the relevant section in the ToC, and includes a progress indicator to visually represent scroll progress.
+  - Developers seeking alternatives might consider the [remark-toc](https://github.com/remarkjs/remark-toc) plugin.
 
 ### Planned Improvements
-- [ ] Implement a table of contents (ToC) sidebar for blog articles.
-
+- Currently, there are no planned improvements. We'll update this section as plans develop.
 
 ### Bug Fixes
 - Currently, there are no known bugs. If you encounter any issues, please report them on our [issues page](https://github.com/mearashadowfax/ScrewFast/issues).
@@ -608,6 +614,8 @@ Configure the compressor in `astro.config.mjs` file:
   integrations: [sitemap()],
 });
 ```
+
+- [Bag of Tricks for Astro's View Tran­si­tions](https://github.com/martrapp/astro-vtbot#readme): is a collection of extensions and support aimed at enhancing Astro's view transitions. Whether you're looking to add flair to your website or streamline user experience, this toolkit offers various techniques to elevate your projects. In the template, it was used to add View Transitions to a Starlight docs.
 
 ### Flexibility with Integrations
 
