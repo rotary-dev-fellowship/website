@@ -42,8 +42,8 @@ dependencies:
     specifier: ^4.0.0
     version: 4.0.0
   preline:
-    specifier: ^2.0.3
-    version: 2.0.3
+    specifier: ^2.1.0
+    version: 2.1.0
   sharp:
     specifier: ^0.33.3
     version: 0.33.3
@@ -4619,8 +4619,8 @@ packages:
       which-pm: 2.0.0
     dev: false
 
-  /preline@2.0.3:
-    resolution: {integrity: sha512-V/sLmRIHd23UCdvJNRKKszntgUqA0381erVzRpQ48NjjMOgI7DyFW4mr+lg387V0oeBc5Dx9Jxa5voppVoH9GA==}
+  /preline@2.1.0:
+    resolution: {integrity: sha512-7pwrGNPVfGYUv1XHW9i49ejowIVHCDTx8JvbM43hapLi1GCjj9NnAZmTKupxaROboB4Nvp2x0ADBVKAhpmZppA==}
     dependencies:
       '@popperjs/core': 2.11.8
     dev: false
