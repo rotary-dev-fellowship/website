@@ -5,6 +5,12 @@
     "paths": {
       "@/*": ["src/*"],
       "@memberImages/*": ["src/images/members/*"],
+      "@components/*": ["src/components/*"],
+      "@content/*": ["src/content/*"],
+      "@data/*": ["src/data_files/*"],
+      "@images/*": ["src/images/*"],
+      "@styles/*": ["src/styles/*"],
+      "@utils/*": ["src/utils/*"]
     },
   }
 }

@@ -1,0 +1,18 @@
+---
+import { countryCodes, counts } from "@/data_files/member-stats.json";
+import { getCountryEmojiByPhoneCode } from "@/utils/countries";
+import { randomizeArray } from "@/utils/utils";
+
+const { showText } = Astro.props;
+
+const countryEmojis = countryCodes.map((code) => {
+  return getCountryEmojiByPhoneCode(code.toString());
+});
+
+const countryEmojiString = randomizeArray(countryEmojis).join(" ");
+---
+
+<span {...Astro.props}>
+  {showText ? `${counts.members} members from ${counts.countries} countries:` : ""}
+  {countryEmojiString}
+</span>
