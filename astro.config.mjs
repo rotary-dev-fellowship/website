@@ -14,9 +14,10 @@ export default defineConfig({
   },
   i18n: {
     defaultLocale: "en",
-    locales: ["en", "fr"],
+    locales: ["en", "fr", "pt"],
     fallback: {
       fr: "en",
+      pt: "en",
     },
     routing: {
       prefixDefaultLocale: false,
@@ -27,10 +28,11 @@ export default defineConfig({
     tailwind(),
     sitemap({
       i18n: {
-        defaultLocale: "en", // All urls that don't contain `fr` after `https://screwfast.uk/` will be treated as default locale, i.e. `en`
+        defaultLocale: "en", // All urls that don't contain `fr` or `pt` after the base URL will be treated as default locale, i.e. `en`
         locales: {
           en: "en", // The `defaultLocale` value must present in `locales` keys
           fr: "fr",
+          pt: "pt-BR",
         },
       },
     }),
@@ -45,6 +47,7 @@ export default defineConfig({
           label: "English",
           lang: "en",
         },
+        pt: { label: "Português (Brasil)", lang: "pt-BR" },
         // de: { label: "Deutsch", lang: "de" },
         // es: { label: "Español", lang: "es" },
         // fa: { label: "Persian", lang: "fa", dir: "rtl" },
@@ -56,18 +59,22 @@ export default defineConfig({
       sidebar: [
         {
           label: "Quick Start Guides",
-          // translations: {
+          translations: {
+            "pt-BR": "Guias de Início Rápido",
           //   de: "Schnellstartanleitungen",
           //   es: "Guías de Inicio Rápido",
           //   fa: "راهنمای شروع سریع",
           //   fr: "Guides de Démarrage Rapide",
           //   ja: "クイックスタートガイド",
           //   "zh-cn": "快速入门指南",
-          // },
+          },
           autogenerate: { directory: "docs/guides" },
         },
         {
           label: "Resources",
+          translations: {
+            "pt-BR": "Recursos",
+          },
           autogenerate: { directory: "docs/resources" },
         },
       ],
