@@ -1,6 +1,6 @@
 ---
 name: Edison Esequiel dos Santos
-image: "@memberImages/edison_e_santos.jpeg"
+image: "@memberImages/edison-e-santos.png"
 languages: ['Portuguese', 'English']
 
 jobTitle: "Full Stack Engineer"
