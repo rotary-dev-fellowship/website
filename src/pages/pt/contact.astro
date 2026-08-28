@@ -1,0 +1,30 @@
+---
+// Import the necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import ContactSection from "@components/sections/pt/ContactSection_pt.astro";
+---
+
+<!--Utilizing MainLayout for the outer layout of the page, and defining meta for SEO purposes-->
+<MainLayout
+  title="Contato | RotaryDEV Fellowship"
+  lang="pt-BR"
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://rotary-dev-fellowship.pages.dev/pt/contact",
+    url: "https://rotary-dev-fellowship.pages.dev/pt/contact",
+    name: "Fale Conosco | RotaryDEV Fellowship",
+    description:
+      "Tem perguntas ou quer discutir um projeto? Entre em contato e vamos criar a solução perfeita juntos.",
+    isPartOf: {
+      "@type": "WebSite",
+      url: "https://rotary-dev-fellowship.pages.dev",
+      name: "RotaryDEV Fellowship",
+      description:
+        "A comunidade onde inovadores em tecnologia do Rotary International se reúnem para transformar ideias em soluções concretas.",
+    },
+    inLanguage: "pt-BR",
+  }}
+>
+  <ContactSection />
+</MainLayout>

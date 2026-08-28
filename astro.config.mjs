@@ -14,9 +14,10 @@ export default defineConfig({
   },
   i18n: {
     defaultLocale: "en",
-    locales: ["en", "fr"],
+    locales: ["en", "es", "pt"],
     fallback: {
-      fr: "en",
+      es: "en",
+      pt: "en",
     },
     routing: {
       prefixDefaultLocale: false,
@@ -27,10 +28,11 @@ export default defineConfig({
     tailwind(),
     sitemap({
       i18n: {
-        defaultLocale: "en", // All urls that don't contain `fr` after `https://screwfast.uk/` will be treated as default locale, i.e. `en`
+        defaultLocale: "en", // All urls that don't contain a locale prefix will be treated as default locale, i.e. `en`
         locales: {
           en: "en", // The `defaultLocale` value must present in `locales` keys
-          fr: "fr",
+          es: "es-ES",
+          pt: "pt-BR",
         },
       },
     }),
@@ -45,8 +47,9 @@ export default defineConfig({
           label: "English",
           lang: "en",
         },
+        es: { label: "Español", lang: "es" },
+        pt: { label: "Português (Brasil)", lang: "pt-BR" },
         // de: { label: "Deutsch", lang: "de" },
-        // es: { label: "Español", lang: "es" },
         // fa: { label: "Persian", lang: "fa", dir: "rtl" },
         // fr: { label: "Français", lang: "fr" },
         // ja: { label: "日本語", lang: "ja" },
@@ -56,18 +59,23 @@ export default defineConfig({
       sidebar: [
         {
           label: "Quick Start Guides",
-          // translations: {
+          translations: {
+            "es": "Guías de Inicio Rápido",
+            "pt-BR": "Guias de Início Rápido",
           //   de: "Schnellstartanleitungen",
-          //   es: "Guías de Inicio Rápido",
           //   fa: "راهنمای شروع سریع",
           //   fr: "Guides de Démarrage Rapide",
           //   ja: "クイックスタートガイド",
           //   "zh-cn": "快速入门指南",
-          // },
+          },
           autogenerate: { directory: "docs/guides" },
         },
         {
           label: "Resources",
+          translations: {
+            "es": "Recursos",
+            "pt-BR": "Recursos",
+          },
           autogenerate: { directory: "docs/resources" },
         },
       ],

@@ -1,9 +1,12 @@
 ---
+import type { Props as StarlightRouteData } from "@astrojs/starlight/props";
+import { ViewTransitions } from "astro:transitions";
 import StarlightHead from "@astrojs/starlight/components/Head.astro";
-import {
-  default as VtbotStarlight,
-  type Props,
-} from "astro-vtbot/components/starlight/Base.astro";
+import VtbotStarlight from "astro-vtbot/components/starlight/Base.astro";
+
+interface Props extends StarlightRouteData {
+  viewTransitionsFallback?: Parameters<typeof ViewTransitions>[0]["fallback"];
+}
 
 // https://docs.astro.build/en/guides/view-transitions/#fallback-control
 Astro.props.viewTransitionsFallback = "animate";

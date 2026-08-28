@@ -70,7 +70,7 @@ ScrewFast is an open-source template designed for quick and efficient web projec
 ## What's New
 
 ### Added Features
-- [x] **Social Share Component**: 
+- [x] **Social Share Component**:
   - Enables users to share blog posts on social media platforms.
   - Provides easy sharing of a blog post's title and URL.
   - Integrates Clipboard.js for link URL copy functionality.
@@ -79,13 +79,13 @@ ScrewFast is an open-source template designed for quick and efficient web projec
   - Allows users to bookmark blog posts for later reference.
   - Provides a visual indication of whether a post is bookmarked.
   - Utilizes `localStorage` to store bookmarks locally in the browser.
-  - For SSR, replace `localStorage` with cookies to persist bookmarked posts. 
+  - For SSR, replace `localStorage` with cookies to persist bookmarked posts.
     - This setup opens up the possibility for the server to dynamically render content based on user-specific bookmarks, should you choose to implement this feature.
 
 - [x] **Post Feedback Component**:
   - Collects user feedback at the end of each blog post.
   - Serves as a UI demonstration with no live back-end integration.
-  
+
 - [x] **Starlight Documentation Theme Integration**:
   - A sleek, user-friendly, full-featured documentation theme, which enhances the readability and usability of documentation.
   - Offers a range of features such as site navigation, built-in search functionality, dark mode, syntax highlighting for code, and improved SEO.
@@ -122,18 +122,18 @@ This guide will provide you with the necessary steps to set up and familiarize y
 Start by installing the project dependencies. Open your terminal, navigate to the project's root directory, and execute:
 
 ```bash
-npm install
+pnpm install
 ```
 
 This command will install all the necessary dependencies defined in the `package.json` file.
 
 ### Development Commands
 
-With dependencies installed, you can utilize the following npm scripts to manage your project's development lifecycle:
+With dependencies installed, you can utilize the following scripts to manage your project's development lifecycle:
 
-- `npm run dev`: Starts a local development server with hot reloading enabled.
-- `npm run preview`: Serves your build output locally for preview before deployment.
-- `npm run build`: Bundles your site into static files for production.
+- `pnpm dev`: Starts a local development server with hot reloading enabled.
+- `pnpm preview`: Serves your build output locally for preview before deployment.
+- `pnpm build`: Bundles your site into static files for production.
 
 For detailed help with Astro CLI commands, visit [Astro's documentation](https://docs.astro.build/en/reference/cli-reference/).
 
@@ -144,14 +144,14 @@ For detailed help with Astro CLI commands, visit [Astro's documentation](https:/
 Before deployment, you need to create a production build:
 
 ```bash
-npm run build
+pnpm build
 ```
 
 This creates a `dist/` directory with your built site (configurable via [outDir in Astro](https://docs.astro.build/en/reference/configuration-reference/#outdir)).
 
 ### Deploying to Vercel
 
-Click the button below to start deploying your project on Vercel:  
+Click the button below to start deploying your project on Vercel:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmearashadowfax%2FScrewFast)
 
@@ -169,9 +169,9 @@ src/
 │   └── ui/               # UI components categorized by functionality
 ├── content/              # Markdown files for blog posts, insights, products, and site configuration
 │   ├── blog/
-│   ├── docs/           
-│   ├── insights/         
-│   ├── products/         
+│   ├── docs/
+│   ├── insights/
+│   ├── products/
 │   └── config.ts         # Contains site-wide configuration options
 ├── data_files/           # Strings stored as JSON files
 ├── images/               # Static image assets for use across the website
@@ -179,12 +179,12 @@ src/
 │   └── MainLayout.astro  # The main wrapping layout for all pages
 ├── pages/                # Astro files representing individual pages and website sections
 │   ├── 404.astro         # Custom 404 page
-│   ├── blog/   
+│   ├── blog/
 │   ├── fr/               # Localized content
-│   ├── contact.astro     
+│   ├── contact.astro
 │   ├── index.astro       # The landing/home page
-│   ├── insights/         
-│   ├── products/         
+│   ├── insights/
+│   ├── products/
 │   ├── robots.txt.ts     # Dynamically generates robots.txt
 │   └── services.astro
 ├── styles/               # CSS styles
@@ -202,7 +202,7 @@ public/
 └── scripts/
     └── vendor/
         ├── gsap/ # Animations powered by GSAP (GreenSock Animation Platform)
-        │   └── gsap.min.js 
+        │   └── gsap.min.js
         ├── lenis/ # Lenis script for smooth scrolling effects
         │   └── lenis.js
         └── preline/   # Preline UI plugins
@@ -352,7 +352,7 @@ With Starlight, you gain access to a wealth of powerful features and integration
 
 > [!NOTE]
 > Dive into the Starlight's comprehensive feature list and learn how it can streamline your development process by visiting the theme's [documentation site](https://starlight.astro.build/).
-> 
+>
 ### Lenis for Smooth Scrolling
 
 Experience buttery smooth scrolling with [Lenis](https://lenis.studiofreight.com/). We've integrated Lenis to provide an enhanced scrolling experience that's both fluid and responsive.
