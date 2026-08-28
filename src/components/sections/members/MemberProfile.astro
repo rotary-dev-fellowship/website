@@ -1,0 +1,241 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import Icon from "@/components/ui/icons/Icon.astro";
+import type { MemberProfileLabels } from "@/i18n/memberProfileLabels";
+import { getCountryByCode } from "@/utils/countries";
+import { formatDate } from "@/utils/utils";
+
+interface Props {
+  member: CollectionEntry<"members">;
+  labels: MemberProfileLabels;
+  posts?: CollectionEntry<"blog">[];
+  membersBasePath: string;
+  dateLocale?: string;
+}
+
+const { member, labels, posts = [], dateLocale } = Astro.props;
+const data = member.data;
+const social = data.social;
+const country = getCountryByCode(data.rotaryClub.country);
+const countryName = country?.name ?? data.rotaryClub.country;
+const rotaryClubLine = `${data.rotaryClub.name}, ${data.rotaryClub.city}, ${countryName}, D${data.rotaryClub.districtNumber}`;
+const linkedInUrl = social?.linkedIn
+  ? social.linkedIn.startsWith("http")
+    ? social.linkedIn
+    : `https://www.linkedin.com/in/${social.linkedIn}`
+  : undefined;
+const hasTechnologies = data.technologies && data.technologies.length > 0;
+const hasLanguages = data.languages && data.languages.length > 0;
+const hasPublications = posts.length > 0;
+---
+
+<div
+  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+>
+  <article
+    class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 shadow-sm dark:border-neutral-700 dark:bg-neutral-800/50 sm:p-8"
+  >
+    <div class="grid gap-8 md:grid-cols-[minmax(0,280px)_1fr] md:gap-10">
+      <!-- Left column: photo and social links -->
+      <div class="flex flex-col items-center md:items-start">
+        <div class="w-full max-w-[280px] overflow-hidden rounded-xl">
+          <Image
+            class="aspect-square w-full object-cover"
+            src={data.image}
+            alt={labels.photoAlt(data.name)}
+            draggable="false"
+            loading="eager"
+            format="avif"
+          />
+        </div>
+
+        {
+          social && (
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-3 md:justify-start">
+              {social.github && (
+                <a
+                  class="group inline-flex size-10 items-center justify-center rounded-lg bg-neutral-200/80 text-neutral-700 transition hover:bg-neutral-300 dark:bg-neutral-700/80 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                  href={`https://github.com/${social.github}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                >
+                  <Icon name="github" />
+                </a>
+              )}
+              {linkedInUrl && (
+                <a
+                  class="group inline-flex size-10 items-center justify-center rounded-lg bg-neutral-200/80 text-neutral-700 transition hover:bg-neutral-300 dark:bg-neutral-700/80 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                  href={linkedInUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                >
+                  <Icon name="linkedIn" />
+                </a>
+              )}
+              {social.twitter && (
+                <a
+                  class="group inline-flex size-10 items-center justify-center rounded-lg bg-neutral-200/80 text-neutral-700 transition hover:bg-neutral-300 dark:bg-neutral-700/80 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                  href={`https://x.com/${social.twitter}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="X"
+                >
+                  <Icon name="x" />
+                </a>
+              )}
+              {social.website && (
+                <a
+                  class="group inline-flex size-10 items-center justify-center rounded-lg bg-neutral-200/80 text-neutral-700 transition hover:bg-neutral-300 dark:bg-neutral-700/80 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                  href={social.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Website"
+                >
+                  <svg
+                    class="h-4 w-4 flex-shrink-0"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="m20.893 13.393-1.135-1.135a2.252 2.252 0 0 1-.421-.585l-1.08-2.16a.414.414 0 0 0-.663-.107.827.827 0 0 1-.812.21l-1.273-.363a.89.89 0 0 0-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 0 1-1.81 1.025 1.055 1.055 0 0 1-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 0 1-1.383-2.46l.007-.042a2.25 2.25 0 0 1 .29-.787l.09-.15a2.25 2.25 0 0 1 2.37-1.048l1.178.236a1.125 1.125 0 0 0 1.302-.795l.208-.73a1.125 1.125 0 0 0-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 0 1-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 0 1-1.458-1.137l1.411-2.353a2.25 2.25 0 0 0 .286-.76m11.928 9.869A9 9 0 0 0 8.965 3.525m11.928 9.868A9 9 0 1 1 8.965 3.525" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Right column: profile details -->
+      <div class="min-w-0 space-y-6">
+        <header class="space-y-2">
+          <h1
+            class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-3xl"
+          >
+            {data.name}
+            {country?.emoji}
+          </h1>
+          <p class="text-pretty text-lg text-neutral-600 dark:text-neutral-400">
+            {data.jobTitle}
+          </p>
+
+          {
+            (data.openForWork || data.openForMentorship) && (
+              <div class="flex flex-wrap gap-2 pt-1">
+                {data.openForWork && (
+                  <span class="inline-flex items-center rounded-lg bg-green-500/15 px-3 py-1 text-xs font-medium text-green-700 dark:bg-green-500/20 dark:text-green-300">
+                    {labels.openForWork}
+                  </span>
+                )}
+                {data.openForMentorship && (
+                  <span class="inline-flex items-center rounded-lg bg-blue-500/15 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-500/20 dark:text-blue-300">
+                    {labels.openForMentorship}
+                  </span>
+                )}
+              </div>
+            )
+          }
+        </header>
+
+        <section>
+          <h2
+            class="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400"
+          >
+            {labels.aboutMe}
+          </h2>
+          <p class="text-pretty text-neutral-700 dark:text-neutral-300">
+            {data.bio}
+          </p>
+        </section>
+
+        {
+          hasTechnologies && (
+            <section>
+              <h2
+                class="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400"
+              >
+                {labels.technologies}
+              </h2>
+              <div class="flex flex-wrap gap-2">
+                {data.technologies!.map((tech) => (
+                  <span class="inline-flex items-center rounded-lg bg-neutral-400/30 px-3 py-1.5 text-xs font-medium text-neutral-700 dark:bg-neutral-700/60 dark:text-neutral-300">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </section>
+          )
+        }
+
+        {
+          hasLanguages && (
+            <section>
+              <h2
+                class="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400"
+              >
+                {labels.languages}
+              </h2>
+              <div class="flex flex-wrap gap-2">
+                {data.languages!.map((language) => (
+                  <span class="inline-flex items-center rounded-lg bg-neutral-400/30 px-3 py-1.5 text-xs font-medium text-neutral-700 dark:bg-neutral-700/60 dark:text-neutral-300">
+                    {language}
+                  </span>
+                ))}
+              </div>
+            </section>
+          )
+        }
+
+        <section>
+          <h2
+            class="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400"
+          >
+            {labels.rotaryClub}
+          </h2>
+          <p class="text-pretty text-neutral-700 dark:text-neutral-300">
+            {rotaryClubLine}
+          </p>
+        </section>
+
+        {
+          hasPublications && (
+            <section>
+              <h2
+                class="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400"
+              >
+                {labels.publications}
+              </h2>
+              <ul class="space-y-2">
+                {posts.map((post) => (
+                  <li>
+                    <a
+                      class="text-neutral-700 underline decoration-neutral-400 underline-offset-2 transition hover:text-neutral-900 hover:decoration-neutral-600 dark:text-neutral-300 dark:decoration-neutral-600 dark:hover:text-neutral-100"
+                      href={`/blog/${post.slug}/`}
+                      data-astro-prefetch
+                    >
+                      {post.data.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+
+        <footer
+          class="border-t border-neutral-200 pt-4 text-sm text-neutral-500 dark:border-neutral-700 dark:text-neutral-400"
+        >
+          {labels.memberSince}
+          {formatDate(data.dateJoined, dateLocale)}
+        </footer>
+      </div>
+    </div>
+  </article>
+</div>

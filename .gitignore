@@ -27,3 +27,4 @@ pnpm-debug.log*
 
 # other
 .ref
+.worktrees/
