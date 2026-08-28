@@ -17,7 +17,7 @@ const footerLinks = [
       // { name: "Projects", url: "/projects" },
       // { name: "Mentorship", url: "/mentorship" },
       // { name: "Workshops & Events", url: "/events" },
-      { name: "Contact Us", url: "/contact" },
+      // { name: "Contact Us", url: "/contact" },
     ],
   },
   {

@@ -12,7 +12,7 @@ const footerLinks = [
       { name: "Sobre nosotros", url: "/es/about-us" },
       { name: "Miembros", url: "/es/members" },
       { name: "Únete", url: "/docs/guides/getting-started" },
-      { name: "Contáctenos", url: "/es/contact" },
+      // { name: "Contáctenos", url: "/es/contact" },
     ],
   },
   {
