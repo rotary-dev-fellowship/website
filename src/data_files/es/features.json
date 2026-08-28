@@ -1,0 +1,22 @@
+[
+  {
+    "heading": "Nuestra Misión",
+    "content": "Conectar a desarrolladores rotarios de todo el mundo para colaborar en proyectos que aprovechan la tecnología en apoyo a las causas de Rotary y fomentar el desarrollo profesional y personal de nuestros miembros.",
+    "svg": "groups"
+  },
+  {
+    "heading": "Visión",
+    "content": "Imaginamos un mundo donde la colaboración tecnológica y la innovación impulsan el progreso y el desarrollo sostenible, con una red global de desarrolladores rotarios a la vanguardia de este movimiento.",
+    "svg": "verified"
+  },
+  {
+    "heading": "Valores",
+    "content": "Comunidad, Innovación, Integridad y Servicio. Estamos comprometidos a utilizar nuestras habilidades para generar un impacto positivo.",
+    "svg": "frame"
+  },
+  {
+    "heading": "Historia",
+    "content": "Surgió como un pequeño grupo de rotarios entusiastas de la programación en 2024 y ha crecido hasta incluir miembros de todos los continentes, trabajando juntos en proyectos que van desde el desarrollo de aplicaciones hasta el análisis de datos en apoyo a las iniciativas de Rotary.",
+    "svg": "books"
+  }
+]

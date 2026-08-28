@@ -1,0 +1,29 @@
+{
+  "subTitle": "Encuentra respuestas sobre nuestra misión, proyectos y cómo participar.",
+  "faqs": [
+    {
+      "question": "¿En qué tipo de proyectos trabaja el Rotary Fellowship of Developers?",
+      "answer": "El RFD trabaja en una variedad de proyectos impulsados por la tecnología que apoyan los objetivos humanitarios de Rotary, desde el desarrollo de aplicaciones de servicio comunitario hasta la creación de plantillas web para clubes Rotary. Nuestros proyectos buscan aprovechar la tecnología para generar un cambio positivo."
+    },
+    {
+      "question": "¿Cómo puedo unirme al Rotary Fellowship of Developers?",
+      "answer": "Unirse es sencillo para los desarrolladores. Y si eres nuevo en el desarrollo, no te preocupes, estamos aquí para guiarte. El proceso de incorporación consiste en realizar una contribución a uno de nuestros repositorios (incluida esta web). Damos la bienvenida a cualquier persona apasionada por la tecnología y el servicio comunitario, lista para contribuir a nuestros proyectos."
+    },
+    {
+      "question": "¿Pueden unirse al Fellowship personas que no son rotarias?",
+      "answer": "Aunque nuestro fellowship está compuesto principalmente por miembros de Rotary, recibimos con agrado la colaboración de no rotarios comprometidos a utilizar sus habilidades técnicas para el bien. Contáctanos para explorar cómo puedes participar."
+    },
+    {
+      "question": "¿Qué recursos están disponibles para los miembros?",
+      "answer": "Los miembros tienen acceso a una amplia variedad de recursos, incluidas guías de programación, tutoriales, seminarios web de desarrollo profesional y una red global de profesionales tecnológicos. Nuestra biblioteca de recursos se actualiza constantemente para mantenerte informado y capacitado."
+    },
+    {
+      "question": "¿Con qué frecuencia celebra el RFD talleres y encuentros?",
+      "answer": "Organizamos talleres y encuentros regulares tanto en línea como en distintos lugares del mundo. Estos eventos van desde sesiones técnicas en profundidad hasta encuentros de networking, con el objetivo de fomentar la colaboración y el aprendizaje en nuestra comunidad."
+    },
+    {
+      "question": "¿Ofrece el RFD oportunidades de mentoría?",
+      "answer": "Sí, contamos con un programa de mentoría que conecta a desarrolladores experimentados con miembros que buscan orientación en su trayectoria profesional o en proyectos concretos. Es una excelente forma de aprender, compartir conocimientos y establecer conexiones duraderas."
+    }
+  ]
+}

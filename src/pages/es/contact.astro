@@ -1,0 +1,29 @@
+---
+// Import the necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import ContactSection from "@components/sections/es/ContactSection_es.astro";
+---
+
+<MainLayout
+  title="Contacto | RotaryDEV Fellowship"
+  lang="es"
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://rotary-dev-fellowship.pages.dev/es/contact",
+    url: "https://rotary-dev-fellowship.pages.dev/es/contact",
+    name: "Contáctanos | RotaryDEV Fellowship",
+    description:
+      "¿Tienes preguntas o quieres hablar sobre un proyecto? Escríbenos y encontraremos juntos la solución perfecta.",
+    isPartOf: {
+      "@type": "WebSite",
+      url: "https://rotary-dev-fellowship.pages.dev",
+      name: "RotaryDEV Fellowship",
+      description:
+        "La comunidad donde los innovadores tecnológicos de Rotary International se unen para transformar ideas en soluciones tangibles.",
+    },
+    inLanguage: "es-ES",
+  }}
+>
+  <ContactSection />
+</MainLayout>

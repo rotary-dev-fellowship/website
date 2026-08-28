@@ -1,0 +1,117 @@
+---
+// Import the necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import HeroSection from "@components/sections/landing/HeroSection.astro";
+import HeroSectionAlt from "@components/sections/landing/HeroSectionAlt.astro";
+import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
+import FeaturesNavs from "@components/sections/features/FeaturesNavs.astro";
+import FAQ from "@components/sections/FAQ.astro";
+import AnnouncementBanner from "@components/ui/banners/AnnouncementBanner.astro";
+import heroImage from "@/images/rotary-dev-sticker.png";
+import faqs from "@data/pt/faqs.json";
+import features from "@data/pt/features.json";
+import imgAccess from "@/images/access.jpg";
+import imgCollab from "@/images/collab.jpg";
+import imgMentor from "@/images/mentor.jpg";
+import imgWorkshop from "@/images/workshop.jpg";
+import GithubBtn from "@/components/ui/buttons/GithubBtn.astro";
+import TestimonialsAndMembersSection from "@/components/sections/landing/TestimonialsAndMembersSection.astro";
+import MemberFlags from "@/components/MemberFlags.astro";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const avatarSrcs: Array<string> = [
+  "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+  "https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+  "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80",
+  "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+];
+---
+
+<MainLayout lang="pt-BR">
+  <AnnouncementBanner
+    btnId="dismiss-button"
+    btnTitle="Junte-se a Nós"
+    url="/docs/guides/getting-started"
+    title="Este fellowship ainda não é oficialmente reconhecido pelo Rotary International. Precisamos crescer nossa adesão para nos tornarmos um Rotary Fellowship oficial."
+  >
+    <MemberFlags showText class="text-white dark:text-black"/>
+  </AnnouncementBanner>
+
+  <HeroSection
+    title=`Juntos, <span class="text-yellow-500 dark:text-yellow-400">Codamos</span> por uma Causa`
+    subTitle="Uma comunidade vibrante onde inovadores em tecnologia e humanistas do Rotary International se reúnem para transformar ideias em soluções concretas que beneficiam nossas comunidades e o mundo. Comece a colaborar ou participe do nosso próximo encontro virtual."
+    primaryBtn="Participe"
+    primaryBtnURL="/docs/guides/getting-started"
+    secondaryBtn="Conheça Nossos Membros"
+    secondaryBtnURL="/members"
+    withReview={false}
+    avatars={avatarSrcs}
+    rating=`<span class="font-bold">4.8</span> / 5`
+    starCount={4}
+    reviews=`Com mais de <span class="font-bold">12,8 mil</span> avaliações`
+    src={heroImage}
+    alt="Adesivo do RotaryDEV Fellowship"
+  />
+
+  <FeaturesGeneral
+    id="sobre"
+    title="Sobre Nós"
+    subTitle="Uma comunidade vibrante onde inovadores em tecnologia e humanistas do Rotary International se reúnem para transformar ideias em soluções concretas que beneficiam nossas comunidades e o mundo."
+    features={features}
+  />
+
+  <FeaturesNavs
+    title=`Descubra como o <span class="text-yellow-500 dark:text-yellow-400">Rotary Fellowship of Developers</span> potencializa a tecnologia dentro do Rotary`;
+    tabs={[
+      {
+        heading: "Acesso à Tecnologia para Clubes Rotary",
+        content: "Permita que clubes do Rotary em todo o mundo adotem a tecnologia com templates de sites acessíveis e ferramentas digitais, simplificando a presença online e as operações.",
+        svg: "tools",
+        src: imgAccess,
+        alt: "Um ícone de globo representando acesso global à tecnologia",
+        first: true,
+      },
+      {
+        heading: "Desenvolvimento Colaborativo",
+        content: "Una forças em projetos de tecnologia que apoiam as missões do Rotary, aproveitando nossa rede de desenvolvedores para dar vida a soluções inovadoras.",
+        svg: "dashboard",
+        src: imgCollab,
+        alt: "Duas mãos trabalhando juntas, simbolizando colaboração",
+        second: true,
+      },
+      {
+        heading: "Networking e Mentoria",
+        content: "Conecte-se com desenvolvedores com a mesma visão por meio de nossa plataforma, compartilhando conhecimento e encontrando oportunidades de mentoria para crescer profissionalmente.",
+        svg: "house",
+        src: imgMentor,
+        alt: "Um diagrama de rede simbolizando conexões entre desenvolvedores",
+      },
+      {
+        heading: "Workshops Educacionais",
+        content:
+          "Promova e participe de workshops e encontros de tecnologia, aprimorando habilidades e fomentando uma cultura de aprendizado contínuo dentro da comunidade rotariana.",
+        svg: "house",
+        src: imgWorkshop,
+        alt: "Um ícone ou imagem representando um workshop ou ambiente educacional",
+      },
+    ]}
+  />
+
+  <TestimonialsAndMembersSection />
+
+  <FAQ
+    id="faq"
+    title="Tem dúvidas?"
+    faqs={faqs}
+  />
+
+  <HeroSectionAlt
+    title="Vamos Construir Juntos"
+    subTitle="Você é um desenvolvedor rotariano apaixonado por tecnologia e serviço? Junte-se a nós e faça parte de uma rede que está fazendo diferença no mundo."
+  >
+    <GithubBtn
+      url="https://github.com/rotary-dev-fellowship"
+      title="Visite-nos no GitHub"
+    />
+  </HeroSectionAlt>
+</MainLayout>
