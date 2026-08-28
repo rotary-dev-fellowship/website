@@ -1,13 +1,13 @@
-# Versatile Landing, Blog & Docs Template for a Simplified Web Presence
+# RotaryDEV Fellowship
 
-![ScrewFast](https://github.com/mearashadowfax/ScrewFast/assets/125820963/cdf299bd-414a-4a2d-baf0-d188bb4709c7)
+RotaryDEV Fellowship — the Rotary Fellowship of Developers — is a global community of Rotarians and Rotaractors working in technology, using our skills for global and community betterment. This repository is the source for our website: a hub where members showcase their work, share resources, and welcome other tech-minded Rotarians into the Fellowship.
 
-ScrewFast is an open-source template designed for quick and efficient web project setup, blending minimalism with functionality. Whether you're showcasing a portfolio, launching a company landing page, or running a blog, ScrewFast provides everything you need. By combining the power of the [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/), and [Preline UI](https://preline.co/), this template offers a functional and aesthetically pleasing solution for your web presence.
+This site is itself a community project — built and maintained by Fellowship members. Whether you're fixing a typo or shipping a new feature, your first pull request is welcome.
 
-**[View Live Demo](https://screwfast.uk)**
+**[Visit the site](https://rotary-dev-fellowship.pages.dev)** · **[Join the Fellowship](https://rotary-dev-fellowship.pages.dev/docs/guides/getting-started)**
 
 ## Table of Contents
-  * [Why Choose ScrewFast?](#why-choose-screwfast)
+  * [About This Project](#about-this-project)
   * [Features](#features)
   * [What's New](#whats-new)
   * [Getting Started](#getting-started)
@@ -50,11 +50,11 @@ ScrewFast is an open-source template designed for quick and efficient web projec
   * [Contributing](#contributing)
   * [License](#license)
 
-## Why Choose ScrewFast?
+## About This Project
 
-- **Efficient Architecture:** Deploy faster with a template that's simple to set up and navigate.
-- **Optimized for Small Projects:** Perfect for crisp, professional web personas without excess complexity.
-- **Highly Customizable:** Flexibly adapt and style your site using Astro and Tailwind CSS.
+The site is built with [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/), and [Preline UI](https://preline.co/), with [Starlight](https://starlight.astro.build/) powering the documentation. It started from the open-source [ScrewFast](https://github.com/mearashadowfax/ScrewFast) template and has been adapted for the Fellowship's needs since.
+
+New to contributing? Start with our [first contribution guide](https://rotary-dev-fellowship.pages.dev/docs/guides/make-your-first-contribution/) — it walks through creating your member profile step by step, and is the easiest way to get your first PR merged.
 
 ## Features
 
