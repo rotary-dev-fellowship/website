@@ -1,4 +1,10 @@
 export const languages = {
-    en: "English",
-    fr: "Français",
-};
+  en: "English",
+  es: "Español",
+  fr: "Français",
+  pt: "Português",
+} as const;
+
+export type Locale = keyof typeof languages;
+
+export const locales = Object.keys(languages) as Locale[];
