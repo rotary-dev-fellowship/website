@@ -1,6 +1,6 @@
 const navBarLinks = [
   { name: "Início", url: "/pt" },
-  { name: "Sobre", url: "/about-us" },
+  { name: "Sobre", url: "/pt/about-us" },
   { name: "Membros", url: "/pt/members" },
   { name: "Junte-se", url: "/docs/guides/getting-started" },
 ];
@@ -9,7 +9,7 @@ const footerLinks = [
   {
     section: "Fellowship",
     links: [
-      { name: "Sobre nós", url: "/about-us" },
+      { name: "Sobre nós", url: "/pt/about-us" },
       { name: "Membros", url: "/pt/members" },
       { name: "Junte-se", url: "/docs/guides/getting-started" },
       { name: "Fale conosco", url: "/pt/contact" },
