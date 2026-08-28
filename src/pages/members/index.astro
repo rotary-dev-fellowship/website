@@ -12,7 +12,7 @@ const members: CollectionEntry<"members">[] = (
   await getCollection("members")
 )
   .filter((member) => member.data.active)
-  .sort((a, b) => a.data.dateJoined.getTime() - b.data.dateJoined.getTime());
+  .sort(() => Math.random() - 0.5);
 
 // Define variables for page content
 const title: string = "Members";
