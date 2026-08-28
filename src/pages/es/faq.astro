@@ -1,0 +1,9 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import FAQ from "@components/sections/FAQ.astro";
+import faqs from "@data/es/faqs.json";
+---
+
+<MainLayout title="Preguntas frecuentes | RotaryDev" lang="es">
+  <FAQ id="faq" title="¿Tienes preguntas?" faqs={faqs} />
+</MainLayout>

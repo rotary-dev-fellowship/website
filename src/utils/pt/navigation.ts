@@ -19,7 +19,7 @@ const footerLinks = [
     section: "Recursos",
     links: [
       { name: "Documentação", url: "/docs/pt" },
-      { name: "Perguntas frequentes", url: "/faq" },
+      { name: "Perguntas frequentes", url: "/pt/faq" },
       { name: "Rotary International", url: "https://rotary.org" },
       {
         name: "Rotary Fellowships",
