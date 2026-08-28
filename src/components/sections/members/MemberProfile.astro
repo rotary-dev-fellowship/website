@@ -11,14 +11,20 @@ interface Props {
   labels: MemberProfileLabels;
   posts?: CollectionEntry<"blog">[];
   membersBasePath: string;
+  dateLocale?: string;
 }
 
-const { member, labels, posts = [] } = Astro.props;
+const { member, labels, posts = [], dateLocale } = Astro.props;
 const data = member.data;
 const social = data.social;
 const country = getCountryByCode(data.rotaryClub.country);
 const countryName = country?.name ?? data.rotaryClub.country;
-const rotaryClubLine = `${data.rotaryClub.type} Club of ${data.rotaryClub.name}, ${data.rotaryClub.city}, ${countryName} D${data.rotaryClub.districtNumber}`;
+const rotaryClubLine = `${data.rotaryClub.name}, ${data.rotaryClub.city}, ${countryName}, D${data.rotaryClub.districtNumber}`;
+const linkedInUrl = social?.linkedIn
+  ? social.linkedIn.startsWith("http")
+    ? social.linkedIn
+    : `https://www.linkedin.com/in/${social.linkedIn}`
+  : undefined;
 const hasTechnologies = data.technologies && data.technologies.length > 0;
 const hasLanguages = data.languages && data.languages.length > 0;
 const hasPublications = posts.length > 0;
@@ -58,10 +64,10 @@ const hasPublications = posts.length > 0;
                   <Icon name="github" />
                 </a>
               )}
-              {social.linkedIn && (
+              {linkedInUrl && (
                 <a
                   class="group inline-flex size-10 items-center justify-center rounded-lg bg-neutral-200/80 text-neutral-700 transition hover:bg-neutral-300 dark:bg-neutral-700/80 dark:text-neutral-200 dark:hover:bg-neutral-600"
-                  href={`https://www.linkedin.com/in/${social.linkedIn}`}
+                  href={linkedInUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
@@ -227,7 +233,7 @@ const hasPublications = posts.length > 0;
           class="border-t border-neutral-200 pt-4 text-sm text-neutral-500 dark:border-neutral-700 dark:text-neutral-400"
         >
           {labels.memberSince}
-          {formatDate(data.dateJoined)}
+          {formatDate(data.dateJoined, dateLocale)}
         </footer>
       </div>
     </div>
