@@ -13,26 +13,63 @@ const defaultProps = {
   structuredData: SEO.structuredData,
 };
 
+interface Props {
+  meta?: string;
+  structuredData?: object;
+  social?: {
+    title?: string;
+    description?: string;
+    image?: string;
+    imageType?: string;
+    url?: string;
+    type?: string;
+  };
+}
+
 // Extract props with default values assigned from defaultProps. Values can be overridden when the component is used.
 // For example:
 // <MainLayout title="Custom Title" meta="Custom description." />
 const {
   meta = defaultProps.meta,
   structuredData = defaultProps.structuredData,
-} = Astro.props;
+  social,
+} = Astro.props as Props;
 
 // Define the metadata for your website and individual pages
 const URL = `${Astro.site}`; // Set the website URL in astro.config.mjs
 const author = SITE.author;
 const canonical = Astro.url.href;
-const ogTitle = OG.title;
-const ogDescription = OG.description;
-const socialImageRes = await getImage({
-  src: OG.image,
-  width: 1200,
-  height: 600,
-});
-const socialImage = Astro.url.origin + socialImageRes.src; // Get the full URL of the image (https://stackoverflow.com/a/9858694)
+const ogTitle = social?.title ?? OG.title;
+const ogDescription = social
+  ? (social.description ?? meta ?? OG.description)
+  : OG.description;
+const ogType = social?.type ?? "website";
+const ogUrl = social !== undefined ? (social.url ?? canonical) : URL;
+
+let socialImage: string;
+let socialImageWidth: number;
+let socialImageHeight: number;
+let socialImageType: string;
+
+if (social?.image) {
+  socialImage = new globalThis.URL(
+    social.image,
+    Astro.site ?? Astro.url.origin,
+  ).href;
+  socialImageWidth = 1200;
+  socialImageHeight = 630;
+  socialImageType = social.imageType ?? "image/png";
+} else {
+  const socialImageRes = await getImage({
+    src: OG.image,
+    width: 1200,
+    height: 600,
+  });
+  socialImage = Astro.url.origin + socialImageRes.src; // Get the full URL of the image (https://stackoverflow.com/a/9858694)
+  socialImageWidth = 1200;
+  socialImageHeight = 600;
+  socialImageType = "image/png";
+}
 
 const localePrefixes: Record<string, string> = {
   en: "",
@@ -118,20 +155,20 @@ const appleTouchIcon = await getImage({
 
 <!-- Facebook Meta Tags -->
 <meta property="og:locale" content={currentOgLocale} />
-<meta property="og:url" content={URL} />
-<meta property="og:type" content="website" />
+<meta property="og:url" content={ogUrl} />
+<meta property="og:type" content={ogType} />
 <meta property="og:title" content={ogTitle} />
 <meta property="og:site_name" content={SITE.title} />
 <meta property="og:description" content={ogDescription} />
 <meta property="og:image" content={socialImage} />
-<meta content="1200" property="og:image:width" />
-<meta content="600" property="og:image:height" />
-<meta content="image/png" property="og:image:type" />
+<meta content={String(socialImageWidth)} property="og:image:width" />
+<meta content={String(socialImageHeight)} property="og:image:height" />
+<meta content={socialImageType} property="og:image:type" />
 
 <!-- Twitter Meta Tags -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:domain" content={URL} />
-<meta property="twitter:url" content={URL} />
+<meta property="twitter:url" content={ogUrl} />
 <meta name="twitter:title" content={ogTitle} />
 <meta name="twitter:description" content={ogDescription} />
 <meta name="twitter:image" content={socialImage} />
