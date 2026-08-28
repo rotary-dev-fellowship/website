@@ -83,7 +83,7 @@ function createMemberOgSvg({
   headline: string;
   technologies: string[];
 }) {
-  const nameLines = wrapText(member.data.name, 12, 2);
+  const nameLayout = layoutMemberName(member.data.name);
   const roleLines = wrapText(headline, 28, 1);
   const techMarkup = technologies
     .map((tech, index) => {
@@ -120,11 +120,11 @@ function createMemberOgSvg({
       <image x="84" y="58" width="66" height="66" preserveAspectRatio="xMidYMid meet" href="${brandIconUri}" />
       <text x="168" y="101" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">${escapeXml(SITE.title)}</text>
 
-      <text x="84" y="254" fill="#FAFAFA" font-family="Arial, Helvetica, sans-serif" font-size="${nameLines.length > 1 ? 92 : 104}" font-weight="800" letter-spacing="-3">
-        ${nameLines.map((line, index) => `<tspan x="84" dy="${index === 0 ? 0 : 86}">${escapeXml(line)}</tspan>`).join("")}
+      <text x="84" y="${nameLayout.startY}" fill="#FAFAFA" font-family="Arial, Helvetica, sans-serif" font-size="${nameLayout.fontSize}" font-weight="800" letter-spacing="-3">
+        ${nameLayout.lines.map((line, index) => `<tspan x="84" dy="${index === 0 ? 0 : nameLayout.lineDy}">${escapeXml(line)}</tspan>`).join("")}
       </text>
 
-      <text x="84" y="${nameLines.length > 1 ? 430 : 384}" fill="#A3A3A3" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="500">
+      <text x="84" y="${nameLayout.roleY}" fill="#A3A3A3" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="500">
         ${roleLines.map((line, index) => `<tspan x="84" dy="${index === 0 ? 0 : 34}">${escapeXml(line)}</tspan>`).join("")}
       </text>
 
@@ -168,6 +168,20 @@ function resolveContentAssetPath(entryPath: string, assetPath: string) {
 async function getBrandIconUri() {
   const png = await fs.readFile(brandIconPath);
   return `data:image/png;base64,${png.toString("base64")}`;
+}
+
+function layoutMemberName(name: string) {
+  const lines = wrapText(name.trim(), 18, 3);
+
+  if (lines.length === 1) {
+    return { lines, fontSize: 104, startY: 254, lineDy: 0, roleY: 384 };
+  }
+
+  if (lines.length === 2) {
+    return { lines, fontSize: 88, startY: 240, lineDy: 76, roleY: 420 };
+  }
+
+  return { lines, fontSize: 72, startY: 228, lineDy: 58, roleY: 430 };
 }
 
 function wrapText(value: string, charsPerLine: number, maxLines: number) {
