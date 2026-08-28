@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "@/layouts/MainLayout.astro";
+import BtnCTA from "@/components/ui/buttons/BtnCTA.astro";
+import CardMember from "@/components/ui/cards/CardMember.astro";
+import HeroSectionAlt from "@/components/sections/landing/HeroSectionAlt.astro";
+import { SITE } from "@/data_files/constants";
+import type { CollectionEntry } from "astro:content";
+
+const members: CollectionEntry<"members">[] = (
+  await getCollection("members")
+)
+  .filter((member) => member.data.active)
+  .sort(() => Math.random() - 0.5);
+
+const title = "Miembros";
+const subTitle =
+  "Conoce a las mentes innovadoras que impulsan las iniciativas globales del Rotary Fellowship of Developers.";
+
+const pageTitle = `${title} | ${SITE.title}`;
+---
+
+<MainLayout
+  title={pageTitle}
+  lang="es"
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://rotary-dev-fellowship.pages.dev/es/members",
+    url: "https://rotary-dev-fellowship.pages.dev/es/members",
+    name: pageTitle,
+    description: subTitle,
+    isPartOf: {
+      "@type": "WebSite",
+      url: "https://rotary-dev-fellowship.pages.dev",
+      name: SITE.title,
+      description: SITE.description_short,
+    },
+    inLanguage: "es-ES",
+  }}
+>
+  <div
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <div class="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
+      <div class="flex items-center gap-12">
+        <h1
+          class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight"
+        >
+          {title}
+        </h1>
+        {
+          subTitle && (
+            <p class="hidden max-w-screen-sm text-pretty text-neutral-600 dark:text-neutral-400 md:block">
+              {subTitle}
+            </p>
+          )
+        }
+      </div>
+    </div>
+
+    <section class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8 mb-32">
+      {
+        members.map((member) => {
+          return (
+            <section>
+              <CardMember memberEntry={member} />
+            </section>
+          );
+        })
+      }
+    </section>
+
+    <HeroSectionAlt
+      title="¿Quieres formar parte de este fellowship?"
+      subTitle="¿Eres un desarrollador rotario apasionado por la tecnología y el servicio? Únete a nosotros y forma parte de una red que está marcando la diferencia en el mundo."
+    >
+      <BtnCTA text="¡Únete ahora!" url="/docs/guides/getting-started" />
+    </HeroSectionAlt>
+  </div>
+</MainLayout>
