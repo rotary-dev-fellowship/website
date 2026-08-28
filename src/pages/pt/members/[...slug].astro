@@ -1,0 +1,65 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import MainLayout from "@/layouts/MainLayout.astro";
+import MemberProfile from "@/components/sections/members/MemberProfile.astro";
+import { memberProfileLabels } from "@/i18n/memberProfileLabels";
+import { SITE } from "@/data_files/constants";
+
+export async function getStaticPaths() {
+  const members = await getCollection("members");
+  const blogPosts = await getCollection("blog");
+
+  return members
+    .filter((member) => member.data.active)
+    .map((member) => ({
+      params: { slug: member.slug },
+      props: {
+        member,
+        posts: blogPosts.filter((post) => post.data.author === member.data.name),
+      },
+    }));
+}
+
+type Props = {
+  member: CollectionEntry<"members">;
+  posts: CollectionEntry<"blog">[];
+};
+
+const { member, posts } = Astro.props;
+const labels = memberProfileLabels.pt;
+const pageTitle = `${member.data.name} | ${SITE.title}`;
+const pageUrl = `${SITE.url}/pt/members/${member.slug}`;
+---
+
+<MainLayout
+  title={pageTitle}
+  meta={member.data.bio}
+  lang="pt"
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": pageUrl,
+    url: pageUrl,
+    name: pageTitle,
+    description: member.data.bio,
+    about: {
+      "@type": "Person",
+      name: member.data.name,
+      description: member.data.bio,
+    },
+    isPartOf: {
+      "@type": "WebSite",
+      url: SITE.url,
+      name: SITE.title,
+      description: SITE.description_short,
+    },
+    inLanguage: "pt-BR",
+  }}
+>
+  <MemberProfile
+    member={member}
+    labels={labels}
+    posts={posts}
+    membersBasePath="/pt/members"
+  />
+</MainLayout>
