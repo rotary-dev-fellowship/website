@@ -1,0 +1,38 @@
+{
+  "title": "Precios Simples y Transparentes",
+  "subTitle": "Aumenta la eficiencia con los planes claros y orientados al valor de ScrewFast.",
+  "badge": "Mejor relación calidad-precio",
+  "thirdOption": "¿Soluciones Empresariales?",
+  "btnText": "Solicitar Presupuesto Personalizado",
+
+  "starterKit": {
+    "name": "Kit de Inicio",
+    "description": "La mejor opción para proyectos de bricolaje",
+    "price": "$49",
+    "cents": ".00",
+    "billingFrequency": "USD / mensual",
+    "features": [
+      "Herramientas esenciales",
+      "Acceso a guías y tutoriales",
+      "Soporte estándar"
+    ],
+    "purchaseBtnTitle": "Obtener el Kit de Inicio",
+    "purchaseLink": "#"
+  },
+
+  "professionalToolbox": {
+    "name": "Caja de Herramientas Profesional",
+    "description": "Ideal para uso a gran escala",
+    "price": "$89",
+    "cents": ".00",
+    "billingFrequency": "USD / mensual",
+    "features": [
+      "Selección premium de herramientas",
+      "Soporte prioritario",
+      "Contenido exclusivo y ofertas",
+      "Descuentos por pedidos en volumen"
+    ],
+    "purchaseBtnTitle": "Obtener la Caja Profesional",
+    "purchaseLink": "#"
+  }
+}

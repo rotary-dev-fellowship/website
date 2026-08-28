@@ -39,7 +39,7 @@ const data = [
   ["Benin", "BJ", "BEN", "204", "9.5", "2.25", "229"],
   ["Bermuda", "BM", "BMU", "60", "32.3333", "-64.75", "1-441"],
   ["Bhutan", "BT", "BTN", "64", "27.5", "90.5", "975"],
-  ["Bolivia, Plurinational State of", "BO", "BOL", "68", "-17", "-65", "591"],
+  ["Bolivia", "BO", "BOL", "68", "-17", "-65", "591"],
   ["Bolivia", "BO", "BOL", "68", "-17", "-65", "591"],
   ["Bonaire, Sint Eustatius and Saba", "BQ", "BES", "535", "12.183333", "-68.233333", ""],
   ["Bosnia and Herzegovina", "BA", "BIH", "70", "44", "18", "387"],
