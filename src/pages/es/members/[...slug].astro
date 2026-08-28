@@ -29,12 +29,21 @@ const { member, posts } = Astro.props;
 const labels = memberProfileLabels.es;
 const pageTitle = `${member.data.name} | ${SITE.title}`;
 const pageUrl = `${SITE.url}/es/members/${member.slug}`;
+const socialImage = `/og/members/${member.slug}.webp`;
 ---
 
 <MainLayout
   title={pageTitle}
   meta={member.data.bio}
   lang="es"
+  social={{
+    title: member.data.name,
+    description: member.data.bio,
+    image: socialImage,
+    imageType: "image/webp",
+    url: pageUrl,
+    type: "profile",
+  }}
   structuredData={{
     "@context": "https://schema.org",
     "@type": "ProfilePage",
