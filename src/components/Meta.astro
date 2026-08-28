@@ -37,24 +37,20 @@ const socialImage = Astro.url.origin + socialImageRes.src; // Get the full URL o
 const localePrefixes: Record<string, string> = {
   en: "",
   es: "es",
-  fr: "fr",
   pt: "pt",
 };
 
 const ogLocaleMap: Record<string, string> = {
   en: "en_US",
   es: "es_ES",
-  fr: "fr_FR",
   pt: "pt_BR",
 };
 
+const routeLocalePrefixes = ["es", "fr", "pt"];
+
 function stripLocalePrefix(path: string): string {
   const parts = path.split("/").filter(Boolean);
-  if (
-    parts.length > 0 &&
-    parts[0] in localePrefixes &&
-    parts[0] !== "en"
-  ) {
+  if (parts.length > 0 && routeLocalePrefixes.includes(parts[0])) {
     return "/" + parts.slice(1).join("/");
   }
   return path;

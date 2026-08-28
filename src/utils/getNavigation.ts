@@ -1,12 +1,10 @@
 import enStrings from "@utils/navigation.ts";
-import frStrings from "@utils/fr/navigation.ts";
 import esStrings from "@utils/es/navigation.ts";
 import ptStrings from "@utils/pt/navigation.ts";
 import type { Locale } from "@utils/ui";
 
 const navigationByLocale: Record<Locale, typeof enStrings> = {
   en: enStrings,
-  fr: frStrings,
   es: esStrings,
   pt: ptStrings,
 };
