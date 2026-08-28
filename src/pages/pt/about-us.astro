@@ -1,0 +1,17 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
+import PrimaryCTA from "@/components/ui/buttons/PrimaryCTA.astro";
+import features from "@data/pt/features.json";
+---
+
+<MainLayout title="Sobre Nós | RotaryDev" lang="pt-BR">
+  <FeaturesGeneral
+    id="about"
+    title="Sobre Nós"
+    subTitle="Uma comunidade vibrante onde inovadores em tecnologia e humanistas do Rotary International se reúnem para transformar ideias em soluções concretas que beneficiam nossas comunidades e o mundo."
+    features={features}
+  />
+
+  <PrimaryCTA title="Conheça Nossos Membros" url="/pt/members" />
+</MainLayout>

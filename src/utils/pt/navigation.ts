@@ -1,7 +1,7 @@
 const navBarLinks = [
   { name: "Início", url: "/pt" },
-  { name: "Serviços", url: "/pt/services" },
-  { name: "Contato", url: "/pt/contact" },
+  { name: "Sobre", url: "/pt/about-us" },
+  { name: "Membros", url: "/pt/members" },
   { name: "Junte-se", url: "/docs/guides/getting-started" },
 ];
 
@@ -9,15 +9,17 @@ const footerLinks = [
   {
     section: "Fellowship",
     links: [
-      { name: "Serviços", url: "/pt/services" },
-      { name: "Contato", url: "/pt/contact" },
+      { name: "Sobre nós", url: "/pt/about-us" },
+      { name: "Membros", url: "/pt/members" },
       { name: "Junte-se", url: "/docs/guides/getting-started" },
+      // { name: "Fale conosco", url: "/pt/contact" },
     ],
   },
   {
     section: "Recursos",
     links: [
-      { name: "Documentação", url: "/docs" },
+      { name: "Documentação", url: "/docs/pt" },
+      { name: "Perguntas frequentes", url: "/pt/faq" },
       { name: "Rotary International", url: "https://rotary.org" },
       {
         name: "Rotary Fellowships",
