@@ -14,8 +14,9 @@ export default defineConfig({
   },
   i18n: {
     defaultLocale: "en",
-    locales: ["en", "fr", "pt"],
+    locales: ["en", "es", "fr", "pt"],
     fallback: {
+      es: "en",
       fr: "en",
       pt: "en",
     },
@@ -28,9 +29,10 @@ export default defineConfig({
     tailwind(),
     sitemap({
       i18n: {
-        defaultLocale: "en", // All urls that don't contain `fr` or `pt` after the base URL will be treated as default locale, i.e. `en`
+        defaultLocale: "en", // All urls that don't contain a locale prefix will be treated as default locale, i.e. `en`
         locales: {
           en: "en", // The `defaultLocale` value must present in `locales` keys
+          es: "es-ES",
           fr: "fr",
           pt: "pt-BR",
         },
@@ -47,9 +49,9 @@ export default defineConfig({
           label: "English",
           lang: "en",
         },
+        es: { label: "Español", lang: "es" },
         pt: { label: "Português (Brasil)", lang: "pt-BR" },
         // de: { label: "Deutsch", lang: "de" },
-        // es: { label: "Español", lang: "es" },
         // fa: { label: "Persian", lang: "fa", dir: "rtl" },
         // fr: { label: "Français", lang: "fr" },
         // ja: { label: "日本語", lang: "ja" },
@@ -60,9 +62,9 @@ export default defineConfig({
         {
           label: "Quick Start Guides",
           translations: {
+            "es": "Guías de Inicio Rápido",
             "pt-BR": "Guias de Início Rápido",
           //   de: "Schnellstartanleitungen",
-          //   es: "Guías de Inicio Rápido",
           //   fa: "راهنمای شروع سریع",
           //   fr: "Guides de Démarrage Rapide",
           //   ja: "クイックスタートガイド",
@@ -73,6 +75,7 @@ export default defineConfig({
         {
           label: "Resources",
           translations: {
+            "es": "Recursos",
             "pt-BR": "Recursos",
           },
           autogenerate: { directory: "docs/resources" },
