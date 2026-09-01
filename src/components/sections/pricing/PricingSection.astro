@@ -18,15 +18,13 @@ type Product = {
   purchaseLink: string;
 };
 
-interface PricingSectionProps {
-  title: string;
-  subTitle: string;
-  badge: string;
-  thirdOption: string;
-  btnText: string;
+interface Props {
   pricing: {
     title: string;
     subTitle: string;
+    badge: string;
+    thirdOption: string;
+    btnText: string;
     starterKit: Product;
     professionalToolbox: Product;
   };
