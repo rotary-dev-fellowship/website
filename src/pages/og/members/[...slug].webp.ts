@@ -9,6 +9,13 @@ export const prerender = true;
 const OG_WIDTH = 1200;
 const OG_HEIGHT = 630;
 const ACCENT_COLOR = "#facc15";
+const TEXT_X = 84;
+const PHOTO_X = 706;
+const TEXT_SAFE_WIDTH = PHOTO_X - TEXT_X - 40;
+const TEXT_OVERLAP_ALLOWANCE = 24;
+const ROLE_FONT_SIZE = 28;
+const ROLE_LINE_DY = 34;
+const NAME_LETTER_SPACING = -3;
 const brandIconPath = path.join(process.cwd(), "src/images/icon.png");
 
 export async function getStaticPaths() {
@@ -98,7 +105,9 @@ function createMemberOgSvg({
   technologies: string[];
 }) {
   const nameLayout = layoutMemberName(member.data.name);
-  const roleLines = wrapText(headline, 28, 1);
+  const roleLines =
+    wrapTextToWidth(headline, ROLE_FONT_SIZE, TEXT_SAFE_WIDTH, 2) ??
+    [truncateTextToWidth(headline, ROLE_FONT_SIZE, TEXT_SAFE_WIDTH)];
   const techMarkup = technologies
     .map((tech, index) => {
       const x = 84 + index * 96;
@@ -131,12 +140,12 @@ function createMemberOgSvg({
 
       <text x="168" y="101" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">${escapeXml(SITE.title)}</text>
 
-      <text x="84" y="${nameLayout.startY}" fill="#FAFAFA" font-family="Arial, Helvetica, sans-serif" font-size="${nameLayout.fontSize}" font-weight="800" letter-spacing="-3">
-        ${nameLayout.lines.map((line, index) => `<tspan x="84" dy="${index === 0 ? 0 : nameLayout.lineDy}">${escapeXml(line)}</tspan>`).join("")}
+      <text x="${TEXT_X}" y="${nameLayout.startY}" fill="#FAFAFA" font-family="Arial, Helvetica, sans-serif" font-size="${nameLayout.fontSize}" font-weight="800" letter-spacing="${NAME_LETTER_SPACING}">
+        ${nameLayout.lines.map((line, index) => `<tspan x="${TEXT_X}" dy="${index === 0 ? 0 : nameLayout.lineDy}">${escapeXml(line)}</tspan>`).join("")}
       </text>
 
-      <text x="84" y="${nameLayout.roleY}" fill="#A3A3A3" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="500">
-        ${roleLines.map((line, index) => `<tspan x="84" dy="${index === 0 ? 0 : 34}">${escapeXml(line)}</tspan>`).join("")}
+      <text x="${TEXT_X}" y="${nameLayout.roleY}" fill="#A3A3A3" font-family="Arial, Helvetica, sans-serif" font-size="${ROLE_FONT_SIZE}" font-weight="500">
+        ${roleLines.map((line, index) => `<tspan x="${TEXT_X}" dy="${index === 0 ? 0 : ROLE_LINE_DY}">${escapeXml(line)}</tspan>`).join("")}
       </text>
 
       ${techMarkup}
@@ -177,30 +186,108 @@ function resolveContentAssetPath(entryPath: string, assetPath: string) {
 }
 
 function layoutMemberName(name: string) {
-  const lines = wrapText(name.trim(), 18, 3);
+  const trimmed = name.trim();
+  const layouts = [
+    { fontSize: 104, maxLines: 1, startY: 254, lineDy: 0, roleY: 384 },
+    { fontSize: 88, maxLines: 1, startY: 260, lineDy: 0, roleY: 384 },
+    { fontSize: 72, maxLines: 1, startY: 268, lineDy: 0, roleY: 384 },
+    { fontSize: 88, maxLines: 2, startY: 240, lineDy: 76, roleY: 420 },
+    { fontSize: 72, maxLines: 2, startY: 248, lineDy: 58, roleY: 420 },
+    { fontSize: 72, maxLines: 3, startY: 228, lineDy: 58, roleY: 430 },
+  ] as const;
 
-  if (lines.length === 1) {
-    return { lines, fontSize: 104, startY: 254, lineDy: 0, roleY: 384 };
+  const safeLayout = pickNameLayout(trimmed, layouts, TEXT_SAFE_WIDTH);
+  if (safeLayout) {
+    return safeLayout;
   }
 
-  if (lines.length === 2) {
-    return { lines, fontSize: 88, startY: 240, lineDy: 76, roleY: 420 };
+  const overlapLayout = pickNameLayout(trimmed, layouts, TEXT_SAFE_WIDTH + TEXT_OVERLAP_ALLOWANCE);
+  if (overlapLayout) {
+    return overlapLayout;
   }
 
-  return { lines, fontSize: 72, startY: 228, lineDy: 58, roleY: 430 };
+  const fallback = layouts[layouts.length - 1];
+  const lines =
+    wrapTextToWidth(trimmed, fallback.fontSize, TEXT_SAFE_WIDTH + TEXT_OVERLAP_ALLOWANCE, fallback.maxLines) ??
+    [truncateTextToWidth(trimmed, fallback.fontSize, TEXT_SAFE_WIDTH + TEXT_OVERLAP_ALLOWANCE)];
+
+  return {
+    lines,
+    ...fallback,
+  };
 }
 
-function wrapText(value: string, charsPerLine: number, maxLines: number) {
-  const words = value.trim().split(/\s+/);
+function pickNameLayout(
+  name: string,
+  layouts: readonly {
+    fontSize: number;
+    maxLines: number;
+    startY: number;
+    lineDy: number;
+    roleY: number;
+  }[],
+  maxWidth: number
+) {
+  for (const layout of layouts) {
+    const lines = wrapTextToWidth(name, layout.fontSize, maxWidth, layout.maxLines);
+
+    if (lines) {
+      return { lines, ...layout };
+    }
+  }
+
+  return null;
+}
+
+function estimateCharWidth(char: string, fontSize: number) {
+  if (char === " ") {
+    return fontSize * 0.28;
+  }
+
+  if (/[ilj\.!'|]/.test(char)) {
+    return fontSize * 0.28;
+  }
+
+  if (/[mwMW@]/.test(char)) {
+    return fontSize * 0.72;
+  }
+
+  if (/[A-ZÁÉÍÓÚÀÈÌÒÙÄËÏÖÜÑ]/.test(char)) {
+    return fontSize * 0.62;
+  }
+
+  return fontSize * 0.55;
+}
+
+function estimateTextWidth(text: string, fontSize: number) {
+  if (!text) {
+    return 0;
+  }
+
+  let width = 0;
+
+  for (const char of text) {
+    width += estimateCharWidth(char, fontSize);
+  }
+
+  width += (text.length - 1) * NAME_LETTER_SPACING;
+  return Math.ceil(width * 1.04);
+}
+
+function wrapTextToWidth(value: string, fontSize: number, maxWidth: number, maxLines: number): string[] | null {
+  const words = value.trim().split(/\s+/).filter(Boolean);
+
+  if (!words.length) {
+    return [];
+  }
+
   const lines: string[] = [];
   let currentLine = "";
-  let wordIndex = 0;
 
   for (const word of words) {
     const nextLine = currentLine ? `${currentLine} ${word}` : word;
-    wordIndex += 1;
 
-    if (nextLine.length <= charsPerLine || currentLine.length === 0) {
+    if (estimateTextWidth(nextLine, fontSize) <= maxWidth || !currentLine) {
       currentLine = nextLine;
       continue;
     }
@@ -208,25 +295,43 @@ function wrapText(value: string, charsPerLine: number, maxLines: number) {
     lines.push(currentLine);
     currentLine = word;
 
-    if (lines.length === maxLines - 1) {
-      break;
+    if (lines.length >= maxLines) {
+      return null;
     }
   }
 
-  const remainingWords = words.slice(wordIndex);
-  const lastLine = [currentLine, ...remainingWords].filter(Boolean).join(" ").trim();
-
-  if (lastLine) {
-    lines.push(lastLine);
-  }
-
-  return lines.slice(0, maxLines).map((line, index, allLines) => {
-    if (index === allLines.length - 1 && allLines.length === maxLines && line.length > charsPerLine) {
-      return `${line.slice(0, charsPerLine - 1).trimEnd()}…`;
+  if (currentLine) {
+    if (lines.length >= maxLines) {
+      return null;
     }
 
-    return line;
-  });
+    const fittedLine =
+      estimateTextWidth(currentLine, fontSize) <= maxWidth
+        ? currentLine
+        : truncateTextToWidth(currentLine, fontSize, maxWidth);
+
+    lines.push(fittedLine);
+  }
+
+  if (lines.some((line) => estimateTextWidth(line, fontSize) > maxWidth)) {
+    return null;
+  }
+
+  return lines;
+}
+
+function truncateTextToWidth(value: string, fontSize: number, maxWidth: number) {
+  if (estimateTextWidth(value, fontSize) <= maxWidth) {
+    return value;
+  }
+
+  let truncated = value;
+
+  while (truncated.length > 1 && estimateTextWidth(`${truncated}…`, fontSize) > maxWidth) {
+    truncated = truncated.slice(0, -1).trimEnd();
+  }
+
+  return `${truncated}…`;
 }
 
 function truncateText(value: string, maxLength: number) {
