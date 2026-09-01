@@ -3,20 +3,13 @@
 import MainLayout from "@/layouts/MainLayout.astro";
 import HeroSection from "@/components/sections/landing/HeroSection.astro";
 import HeroSectionAlt from "@/components/sections/landing/HeroSectionAlt.astro";
-import ClientsSection from "@/components/sections/landing/ClientsSection.astro";
 import FeaturesGeneral from "@/components/sections/features/FeaturesGeneral.astro";
 import FeaturesNavs from "@/components/sections/features/FeaturesNavs.astro";
-import PricingSection from "@/components/sections/pricing/PricingSection.astro";
 import FAQ from "@/components/sections/FAQ.astro";
 import AnnouncementBanner from "@/components/ui/banners/AnnouncementBanner.astro";
 import heroImage from "@/images/rotary-dev-sticker.png";
 import faqs from "@/data_files/faqs.json";
 import features from "@/data_files/features.json";
-import pricing from "@/data_files/pricing.json";
-import featureImage from "@/images/features-image.avif";
-import construction from "@/images/construction-image.avif";
-import tools from "@/images/automated-tools.avif";
-import dashboard from "@/images/dashboard-image.avif";
 import imgAccess from "@/images/access.jpg";
 import imgCollab from "@/images/collab.jpg";
 import imgMentor from "@/images/mentor.jpg";
@@ -56,7 +49,7 @@ const avatarSrcs: Array<string> = [
     starCount={4}
     reviews=`From Over <span class="font-bold">12.8k</span> Reviews`
     src={heroImage}
-    alt="Stack of ScrewFast product boxes containing assorted hardware tools"
+    alt="The RotaryDEV Fellowship sticker logo"
   />
 
   <!--

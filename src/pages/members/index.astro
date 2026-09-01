@@ -63,7 +63,7 @@ const pageTitle: string = `${title} | ${SITE.title}`;
     <!-- MEMBERS -->
     <section class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8 mb-32">
       {
-        members.map((member, index) => {
+        members.map((member) => {
           return <section>
             <CardMember memberEntry={member} />
           </section>;
