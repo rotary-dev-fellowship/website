@@ -23,18 +23,32 @@ export async function getStaticPaths() {
 export async function GET({ props }: { props: { member: CollectionEntry<"members"> } }) {
   const { member } = props;
   const memberImagePath = await getMemberImagePath(member);
-  const brandIconUri = await getBrandIconUri();
-  const memberImage = await sharp(memberImagePath)
-    .resize(320, 320, {
+
+  const memberImageBuffer = await sharp(memberImagePath)
+    .resize(494, OG_HEIGHT, {
       fit: "cover",
       position: "centre",
     })
     .png()
     .toBuffer();
 
-  const memberImageUri = `data:image/png;base64,${memberImage.toString("base64")}`;
+  const brandIconBuffer = await sharp(brandIconPath)
+    .resize(66, 66, {
+      fit: "contain",
+    })
+    .png()
+    .toBuffer();
+
   const headline = member.data.jobTitle || "RotaryDEV Fellowship Member";
   const technologies = (member.data.technologies ?? []).slice(0, 3);
+
+  const svgOverlayBuffer = Buffer.from(
+    createMemberOgSvg({
+      member,
+      headline,
+      technologies,
+    })
+  );
 
   const image = await sharp({
     create: {
@@ -46,15 +60,19 @@ export async function GET({ props }: { props: { member: CollectionEntry<"members
   })
     .composite([
       {
-        input: Buffer.from(
-          createMemberOgSvg({
-            brandIconUri,
-            memberImageUri,
-            member,
-            headline,
-            technologies,
-          }),
-        ),
+        input: memberImageBuffer,
+        left: 706,
+        top: 0,
+      },
+      {
+        input: svgOverlayBuffer,
+        left: 0,
+        top: 0,
+      },
+      {
+        input: brandIconBuffer,
+        left: 84,
+        top: 58,
       },
     ])
     .webp({
@@ -71,14 +89,10 @@ export async function GET({ props }: { props: { member: CollectionEntry<"members
 }
 
 function createMemberOgSvg({
-  brandIconUri,
-  memberImageUri,
   member,
   headline,
   technologies,
 }: {
-  brandIconUri: string;
-  memberImageUri: string;
   member: CollectionEntry<"members">;
   headline: string;
   technologies: string[];
@@ -112,12 +126,9 @@ function createMemberOgSvg({
           <stop offset="100%" stop-color="#171717" stop-opacity="0.0" />
         </linearGradient>
       </defs>
-      <rect width="${OG_WIDTH}" height="${OG_HEIGHT}" fill="url(#canvasBackground)" />
       <rect x="0" y="0" width="736" height="${OG_HEIGHT}" fill="#171717" />
-      <image x="706" y="0" width="494" height="${OG_HEIGHT}" preserveAspectRatio="xMidYMid slice" href="${memberImageUri}" />
       <rect x="662" y="0" width="230" height="${OG_HEIGHT}" fill="url(#portraitFade)" />
 
-      <image x="84" y="58" width="66" height="66" preserveAspectRatio="xMidYMid meet" href="${brandIconUri}" />
       <text x="168" y="101" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">${escapeXml(SITE.title)}</text>
 
       <text x="84" y="${nameLayout.startY}" fill="#FAFAFA" font-family="Arial, Helvetica, sans-serif" font-size="${nameLayout.fontSize}" font-weight="800" letter-spacing="-3">
@@ -163,11 +174,6 @@ function resolveContentAssetPath(entryPath: string, assetPath: string) {
   }
 
   return path.resolve(path.dirname(entryPath), assetPath);
-}
-
-async function getBrandIconUri() {
-  const png = await fs.readFile(brandIconPath);
-  return `data:image/png;base64,${png.toString("base64")}`;
 }
 
 function layoutMemberName(name: string) {

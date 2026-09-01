@@ -46,7 +46,7 @@ import Icon from "./icons/Icon.astro";
 <!--https://preline.co/plugins/html/dropdown.html-->
 <script is:inline src="/scripts/vendor/preline/dropdown/index.js"></script>
 
-<script define:vars={{ locales }}>
+<script is:inline define:vars={{ locales }}>
   document.addEventListener("DOMContentLoaded", function () {
     const languageLinks = document.querySelectorAll(
       ".hs-dropdown-menu a[data-lang]",
