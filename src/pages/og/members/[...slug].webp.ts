@@ -176,8 +176,6 @@ function resolveContentAssetPath(entryPath: string, assetPath: string) {
   return path.resolve(path.dirname(entryPath), assetPath);
 }
 
-}
-
 function layoutMemberName(name: string) {
   const lines = wrapText(name.trim(), 18, 3);
 
